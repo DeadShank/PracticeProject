@@ -1,0 +1,19 @@
+{
+  "name": "APIPractice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "tests:chrome": "playwright test --config=playwright.config.ts --project=Chromium",
+    "tests:firefox": "playwright test --config=playwright.config.ts --project=Firefox",
+    "tests:webkit": "playwright test --config=playwright.config.ts --project=Webkit",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.56.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
