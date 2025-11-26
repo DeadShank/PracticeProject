@@ -8,3 +8,7 @@ export async function loadHomepageCoinMarket(page: any){
 export async function assertTitle(page: any) {
     await page.waitForSelector('h1');
 }
+
+export async function zeroWebPage(page: any) {
+    await page.goto("http://zero.webappsecurity.com/index.html");
+}

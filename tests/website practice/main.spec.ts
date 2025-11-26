@@ -2,6 +2,7 @@
 import {expect, test} from "@playwright/test";
 
 test.describe("Top panel element exist", async () => {
+    
     test("category: Top", async ({page}) => {
         await loadHomepageCoinMarket(page);
         const element = page.locator('span[title="Top"]').first();
