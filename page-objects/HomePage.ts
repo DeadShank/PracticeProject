@@ -1,11 +1,11 @@
 ﻿import {Keyboard, Locator, Page} from "@playwright/test";
 
 export class HomePage {
-    readonly page!: Page;
-    readonly signInButton!: Locator;
-    readonly searchInput!: Locator;
-    readonly feedbackButton!: Locator;
-    readonly pressEnter!: Keyboard;
+    private readonly page!: Page;
+    private readonly signInButton!: Locator;
+    private searchInput!: Locator;
+    private feedbackButton!: Locator;
+    private pressEnter!: Keyboard;
 
     constructor(page: Page) {
         this.page = page;
