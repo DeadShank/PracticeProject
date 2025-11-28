@@ -1,27 +1,28 @@
 ﻿import {expect, test} from "@playwright/test";
-import {zeroWebPage} from "../../helpers";
+import {HomePage} from "../../page-objects/HomePage";
+import {LoginPage} from "../../page-objects/LoginPage";
+import {PurchaseForeignCurrency} from "../../page-objects/PurchaseForeignCurrency";
 
 test.describe("Purchase Currency", async () => {
+    let homePage: HomePage;
+    let loginPage: LoginPage;
+    let purchaseTab: PurchaseForeignCurrency;
+
     test.beforeEach(async ({page}) => {
-        await zeroWebPage(page);
-        await page.click("#signin_button");
-        await page.fill("#user_login", "username");
-        await page.fill("#user_password", "password");
-        await page.click("text=Sign in");
-        await page.goto("http://zero.webappsecurity.com/bank/pay-bills.html");
-        await page.click("text=Purchase Foreign Currency");
+        homePage = new HomePage(page);
+        loginPage = new LoginPage(page);
+        purchaseTab = new PurchaseForeignCurrency(page);
+
+        await homePage.gotoHomePage();
+        await homePage.clickSignIn();
+        await loginPage.login("username", "password");
+        await purchaseTab.goToTargetURL();
     })
 
-    test("Canada dollar purchase", async ({page}) => {
-        await page.selectOption("#pc_currency","CAD");
-        await expect(page.locator("#sp_sell_rate")).toBeVisible();
-        await page.fill("#pc_amount", "500");
-        await page.click("#pc_inDollars_true");
-        await page.click("#pc_calculate_costs");
-        await expect(page.locator("#pc_conversion_amount")).toBeVisible();
-        await page.click("#purchase_cash");
-        const alertMessage = await page.locator("#alert_content");
-        await expect(alertMessage).toBeVisible();
-        await expect(alertMessage).toContainText("Foreign currency cash was successfully purchased.");
+    test("Canada dollar purchase", async () => {
+        await purchaseTab.inputFills("CAD", "500");
+        await purchaseTab.radioAndCalculateClick(1);
+        await purchaseTab.checkMessages();
+        await purchaseTab.clickPurchase();
     })
 })

@@ -3,9 +3,9 @@
 export class HomePage {
     private readonly page!: Page;
     private readonly signInButton!: Locator;
-    private searchInput!: Locator;
-    private feedbackButton!: Locator;
-    private pressEnter!: Keyboard;
+    private readonly searchInput!: Locator;
+    private readonly feedbackButton!: Locator;
+    private readonly pressEnter!: Keyboard;
 
     constructor(page: Page) {
         this.page = page;

@@ -23,7 +23,6 @@ export class PayBillsPage {
         this.payButton = page.locator("#pay_saved_payees");
         this.detailsButton = page.locator("#sp_get_payee_details");
         this.successfullyMessage = page.locator(".alert-success");
-
     }
 
     async gotoPayBillsPage() {
@@ -50,5 +49,4 @@ export class PayBillsPage {
     async clickPayButton(){
         await this.payButton.click();
     }
-
 }
