@@ -1,7 +1,11 @@
 ﻿import {Page, Locator, expect} from "@playwright/test";
+import {Navbar} from "./components/Navbar";
+import {NavbarTabs} from "../tests/fixtures/navbarTabs";
+import {AbstractPage} from "./AbstractPage";
 
-export class PayBillsPage {
-    private readonly page!: Page;
+export class PayBillsPage extends AbstractPage {
+    private readonly navbar!: Navbar;
+
     private readonly payeeSelect!: Locator;
     private readonly accountSelect!: Locator;
     private readonly amountInput!: Locator;
@@ -14,7 +18,8 @@ export class PayBillsPage {
     private readonly payeeDetails: string = "#sp_payee_details";
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
+        this.navbar = new Navbar(page);
         this.payeeSelect = page.locator("#sp_payee");
         this.accountSelect = page.locator("#sp_account");
         this.amountInput = page.locator("#sp_amount");
@@ -27,6 +32,7 @@ export class PayBillsPage {
 
     async gotoPayBillsPage() {
         await this.page.goto("http://zero.webappsecurity.com/bank/pay-bills.html");
+        await this.navbar.clickTab(NavbarTabs.PayBills);
     }
 
     async inputFills(payee: string, account: string, amount: string, date: string, description: string) {

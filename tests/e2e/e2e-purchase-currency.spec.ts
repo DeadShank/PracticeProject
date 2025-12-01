@@ -1,21 +1,22 @@
 ﻿import {expect, test} from "@playwright/test";
 import {HomePage} from "../../page-objects/HomePage";
 import {LoginPage} from "../../page-objects/LoginPage";
-import {PurchaseForeignCurrency} from "../../page-objects/PurchaseForeignCurrency";
+import {PurchaseForeignCurrencyPage} from "../../page-objects/PurchaseForeignCurrencyPage";
+import {accountData} from "../fixtures/account";
 
 test.describe("Purchase Currency", async () => {
     let homePage: HomePage;
     let loginPage: LoginPage;
-    let purchaseTab: PurchaseForeignCurrency;
+    let purchaseTab: PurchaseForeignCurrencyPage;
 
     test.beforeEach(async ({page}) => {
         homePage = new HomePage(page);
         loginPage = new LoginPage(page);
-        purchaseTab = new PurchaseForeignCurrency(page);
+        purchaseTab = new PurchaseForeignCurrencyPage(page);
 
         await homePage.gotoHomePage();
         await homePage.clickSignIn();
-        await loginPage.login("username", "password");
+        await loginPage.login(accountData.username, accountData.password);
         await purchaseTab.goToTargetURL();
     })
 

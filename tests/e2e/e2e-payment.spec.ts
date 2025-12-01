@@ -19,6 +19,7 @@ test.describe("Payment", async () => {
         await homePage.clickSignIn()
         await loginPage.login(accountData.username, accountData.password);
         await payBillsPage.gotoPayBillsPage();
+        await payBillsPage.wait(2000);
     })
     test("Sprint", async () => {
         await payBillsPage.inputFills(payeeValues.Sprint, accountValues.Brokerage, "5000", "2025-11-14", "sprint test");

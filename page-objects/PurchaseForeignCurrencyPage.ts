@@ -1,6 +1,6 @@
 ﻿import {Page, Locator, expect} from "@playwright/test";
 
-export class PurchaseForeignCurrency {
+export class PurchaseForeignCurrencyPage {
     private readonly page!: Page;
     private readonly purchaseTab!: Locator;
     private readonly currencySelect!: Locator;
